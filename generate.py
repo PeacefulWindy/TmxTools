@@ -33,21 +33,23 @@ def createTmx(filePath,outputDir):
                 if gid > 0 and not gid in tiles:
                     tileTuple=tmxData.get_tile_image_by_gid(gid)
                     tileProps=tmxData.get_tile_properties_by_gid(gid)
-                    tileColliders=tileProps["colliders"]
 
                     tile={}
-                    colliders=[]
-                    for collider in tileColliders:
-                        colliderData=[]
-                        points=collider.apply_transformations()
-                        for it in points:
-                            data={
-                                "x":it[0],
-                                "y":it[1]
-                            }
-                            colliderData.append(data)
-                        colliders.append(colliderData)
-                    tile["colliders"]=colliders
+                    if tileProps and "colliders" in tileProps:
+                        tileColliders=tileProps["colliders"]
+
+                        colliders=[]
+                        for collider in tileColliders:
+                            colliderData=[]
+                            points=collider.apply_transformations()
+                            for it in points:
+                                data={
+                                    "x":it[0],
+                                    "y":it[1]
+                                }
+                                colliderData.append(data)
+                            colliders.append(colliderData)
+                        tile["colliders"]=colliders
 
                     if tileTuple:
                         imageName=tileTuple[0]
