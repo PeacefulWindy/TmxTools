@@ -13,8 +13,8 @@ def createTmx(filePath,outputDir):
     
     mapData["width"] = tmxData.width
     mapData["height"] =tmxData.height
-    mapData["tilewidth"] =tmxData.tilewidth
-    mapData["tileheight"] =tmxData.tileheight
+    mapData["tileWidth"] =tmxData.tilewidth
+    mapData["tileHeight"] =tmxData.tileheight
 
     tiles={}
     imageIndex=1
@@ -69,8 +69,8 @@ def createTmx(filePath,outputDir):
                         if imageId > 0:
                             tile["width"]=tileRect[2]
                             tile["height"]=tileRect[3]
-                            tile["x"]=tileRect[0]-tile["width"]
-                            tile["y"]=tileRect[1]-tile["height"]
+                            tile["x"]=tileRect[0]
+                            tile["y"]=tileRect[1]
                         
                         tiles[gid]=tile
                 layerMapData.append(gid)
