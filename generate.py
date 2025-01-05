@@ -2,6 +2,13 @@ import json
 import os
 import time
 import pytmx
+import shutil
+
+def move(fromPath,toPath):
+    if not os.path.exists(toPath):
+        os.makedirs(toPath)
+    
+    shutil.copytree(fromPath, toPath,dirs_exist_ok=True)
 
 def createTmx(filePath,outputDir):
     basePath=os.path.dirname(filePath)
@@ -112,6 +119,18 @@ def main():
 
             filepath = os.path.join(root, file)
             createTmx(filepath,json_data["output"])
+    
+    print("will move map...")
+    if "client" in json_data["move"]:
+        print("move client map...")
+        move(json_data["output"],json_data["move"]["client"])
+
+    if "server" in json_data["move"]:
+        print("move server map...")
+        move(json_data["output"],json_data["move"]["server"])
+    
+    print("move map finish!")
+    print()
 
 if __name__ == "__main__":
     start_time = time.time()
